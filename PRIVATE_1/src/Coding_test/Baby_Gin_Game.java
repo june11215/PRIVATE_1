@@ -8,43 +8,35 @@ public class Baby_Gin_Game {
 		
 	Scanner in = new Scanner(System.in);
 	
-	int sortedN[] = new int[6];
 	int number = in.nextInt(); //6자리 숫자 입력
-	int dN = 100000,temp=number;
-	int count=0;
-	
-	for(int i=0;i<sortedN.length;i++) {
-		sortedN[i]=temp/dN;
-		temp=number%dN;
-		dN /= 10;
-	} // 각 숫자를 자릿수별로 배열에 저장
+	int answer=0;
 
-	for(int i=0;i<sortedN.length;i++)
-		for(int j=0;j<sortedN.length;j++) {
-			if(sortedN[i]<sortedN[j]) {
-				temp=sortedN[j];
-				sortedN[j]=sortedN[i];
-				sortedN[i]=temp;
+	int count[] = new int[10];
+	
+	for(int i=0;i<6;i++) {
+		count[number%10]++;
+		number /=10;
+	}
+	
+		for(int i=0;i<count.length;i++) {
+			if(count[i]>=3)
+				answer++;
 			}
-		}
-	
-	for(int i=0;i<sortedN.length-2;i++) {
-		if((sortedN[i]==sortedN[i+1]&&sortedN[i]==sortedN[i+2])||
-				(sortedN[i]+1==sortedN[i+1]&&sortedN[i+1]+1==sortedN[i+2]) ) {
-			count++;
-		}
-	} // 각 숫자를 자릿수별로 배열에 저장
-	
-	if(count>2) {
-		System.out.println("Baby-Gin Success!!!");
-	}
-	else {
-		System.out.println("Baby-Gin Failㅠㅠㅠ");
-
-	}
+		for(int i=0;i<count.length-2;i++) {
+			if(count[i]>0 && count[i+1]>0 && count[i+2]>0)
+				answer++;
+			if(count[i]>1 && count[i+1]>1 && count[i+2]>1)
+				answer++;
+			}
 		
+	if(answer>=2)
+		System.out.println("Win!");
+	else
+		System.out.println("Lose...");
+				
 	}
+}	
 	
 	
 	
-}
+
